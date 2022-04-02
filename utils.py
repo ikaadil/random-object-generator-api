@@ -10,7 +10,7 @@ MIN_FLOAT = 0.0
 MAX_FLOAT = 10000.0
 
 
-def generate_alphanumeric():
+def generate_alphanumerics():
     length = random.randint(MIN_STRING_LENGTH, MAX_STRING_LENGTH)  
     result = ""
 
@@ -38,17 +38,8 @@ def generate_integer():
 
 def generate_float():
     length = random.randint(1, 6) 
-    print(length)
+   
     result = round(random.uniform(MIN_FLOAT, MAX_FLOAT), length)
     result = str(result)
     
     return result
-
-if __name__ == '__main__':
-    # function_list = [generate_alphanumeric, generate_string, generate_integer, generate_float]
-    # dataType = random.choice(function_list)
-
-    # result = dataType()
-
-    # print(dataType, result)
-    print(generate_string())
