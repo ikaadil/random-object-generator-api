@@ -3,7 +3,7 @@
 venv/
 
 #Text file
-*.txt
+output_file.txt
 
 #pyc file
 *.pyc
