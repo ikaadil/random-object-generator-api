@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, send_file
-from service import generate_file
+from service import generate_file_and_report
 app = Flask(__name__)
 
 
 @app.route('/generate', methods=['POST'])
 def upload():
-    response = generate_file()
+    response = generate_file_and_report()
     return jsonify({"response": response})
 
 
