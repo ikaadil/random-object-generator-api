@@ -57,7 +57,7 @@ def generate_file():
                              count_of_string, count_of_float, count_of_integer)
 
     result = {
-        "link": "/Users/project/random-object-generator-api/output_file.txt",
+        "link": "/download/output_file.txt",
         "report": report
     }
 
