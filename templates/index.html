@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Assessment</title>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      padding: 32px;
+      font-size: 20px;
+    }
+    .button {
+      padding: 8px 16px;
+      margin: 8px 0px;
+      width: 120px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .report-button {
+      width: 150px;
+      cursor: not-allowed;
+    }
+
+    .margin-vertical-20 {
+      margin: 20px 0;
+    }
+    .margin-bottom-10 {
+      margin-bottom: 10px;
+    }
+    .empty-link {
+        color: red;
+    }
+  </style>
+
+  <script type="text/javascript">
+    var responseData = {};
+    function generateFile() {
+      fetch("/generate")
+        .then((response) => response.json())
+        .then((res) => {
+          responseData = res.response;
+          var linkElement = document.getElementById("linkText")
+          if (responseData?.link) {
+            linkElement.innerHTML = "Link: ";
+            var a = document.getElementById("link");
+            a.href = responseData?.link;
+            a.innerHTML = "click here to download";
+          } else {
+            linkElement.innerHTML="No link generated" 
+            linkElement.classList.add("empty-link") 
+          }
+
+          if (responseData?.report) {
+            var reportButton =
+              document.getElementsByClassName("report-button")[0];
+            reportButton.style.cursor = "pointer";
+            reportButton.removeAttribute("disabled");
+          }
+        });
+    }
+
+    function showReport() {
+      document.getElementById("alphabet").innerHTML =
+        "Alphabetical string: " + responseData?.report?.alphabetical_string;
+      document.getElementById("real-numbers").innerHTML =
+        "Real numbers: " + responseData?.report?.real_numbers;
+      document.getElementById("integers").innerHTML =
+        "Integers: " + responseData?.report?.integers;
+      document.getElementById("alphanumerics").innerHTML =
+        "Alphanumerics: " + responseData?.report?.alphanumerics;
+    }
+
+    function docWrite(docText) {
+      document.write(docText);
+    }
+  </script>
+</head>
+<body>
+  <h1>Random Object Generator</h1>
+
+  <div>
+    <button onclick="generateFile()" class="button">Generate</button>
+  </div>
+  <div class="margin-vertical-20">
+    <span id="linkText"> </span>
+
+    <a id="link" download="output_file.txt" href="#"> </a>
+  </div>
+  <div>
+    <button onclick="showReport()" disabled class="button report-button">
+      Report
+    </button>
+  </div>
+  <div class="margin-vertical-20">
+    <div id="alphabet" class="margin-bottom-10"></div>
+
+    <div id="real-numbers" class="margin-bottom-10"></div>
+
+    <div id="integers" class="margin-bottom-10"></div>
+
+    <div id="alphanumerics" class="margin-bottom-10"></div>
+  </div>
+</body>

@@ -1,18 +1,22 @@
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify, render_template
 from service import generate_file_and_report
-app = Flask(__name__)
+app = Flask(__name__, static_folder="templates")
 
 
-@app.route('/generate', methods=['POST'])
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
+
+
+@app.route('/generate', methods=['GET'])
 def upload():
     response = generate_file_and_report()
-    return jsonify({"response": response})
 
-
-@app.route('/download/<path:path>', methods=['GET'])
-def download_file(path):
-    return send_file(path, as_attachment=True)
+    if response:
+        return jsonify({"response": response}), 200
+    else:
+        return "File has not been generated", 400
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(debug=True)

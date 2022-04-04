@@ -1,7 +1,7 @@
 import json
 from utils import *
 
-FILE_NAME = "output_file.txt"
+FILE_NAME = "templates/output_file.txt"
 MAX_FILE_SIZE = 2097152
 
 
@@ -33,10 +33,10 @@ def generate_report(text):
         text)
 
     report = {
-        "Alphabetical string": count_of_string,
-        "Real numbers": count_of_float,
-        "Integers": count_of_integer,
-        "Alphanumerics": count_of_alphanumerics
+        "alphabetical_string": count_of_string,
+        "real_numbers": count_of_float,
+        "integers": count_of_integer,
+        "alphanumerics": count_of_alphanumerics
     }
 
     return report
@@ -92,7 +92,7 @@ def generate_file_and_report():
     report = generate_report(text)
 
     result = {
-        "link": "/download/output_file.txt",
+        "link": "/templates/output_file.txt",
         "report": report
     }
 
