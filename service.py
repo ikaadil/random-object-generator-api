@@ -1,7 +1,8 @@
 import json
+import uuid
 from utils import *
 
-FILE_NAME = "templates/output_file.txt"
+FOLDER_PATH = "templates/static/"
 MAX_FILE_SIZE = 2097152
 
 
@@ -42,19 +43,28 @@ def generate_report(text):
     return report
 
 
-def generate_file(text):
-    """Create the file with text"""
+def generate_file(text, file_link):
+    """Create the file with text in the file link with unique name"""
 
-    with open(FILE_NAME, 'w') as file:
+    with open(file_link, 'w') as file:
         file.write(text)
 
 
+def generate_link():
+    """Generate a link with unique file name"""
+
+    file_name = str(uuid.uuid4()) + ".txt"  # defined unique file name
+    file_link = FOLDER_PATH + file_name
+
+    return file_link
+
+
 def generate_text():
-    """Here our main target is to create a text which length will
-    be equal to MAX_FILE_SIZE. To keep the text size exactly equal 
-    to MAX_FILE_SIZE, we add objects randomly and break the loop when
-    text length is less (MAX_FILE_SIZE - MAX_STRING_LENGTH). Then we add
-    one more string to make the length exactly same.
+    """Here our main target is to create a text which length will be
+    equal to MAX_FILE_SIZE. To keep the text size exactly equal to 
+    MAX_FILE_SIZE, we add objects randomly and break the loop when text
+    length is less (MAX_FILE_SIZE - MAX_STRING_LENGTH). Then we add one
+    more string to make the length exactly same.
     """
 
     text = ""
@@ -63,8 +73,8 @@ def generate_text():
         function_list = [generate_random_alphanumerics,
                          generate_random_string, generate_random_integer, generate_random_float]
 
-        
-        data_type = random.choice(function_list)    # randomly choose the object method
+        # randomly choose the object method
+        data_type = random.choice(function_list)
 
         data_object = data_type()
 
@@ -75,24 +85,27 @@ def generate_text():
 
     file_size = len(text)
     number_of_lack_byte = MAX_FILE_SIZE - file_size
-    text += ", " + generate_random_string(number_of_lack_byte - 2)      # we subtract 2 from number_of_lack_byte, because ', ' requires 2 bytes
-
+    # we subtract 2 from number_of_lack_byte, because ', ' requires 2 bytes
+    text += ", " + generate_random_string(number_of_lack_byte - 2)
 
     return text
 
 
 def generate_file_and_report():
     """ Create a text which size is equal to 2MB and contains Alphabetical 
-    string, Real numbers, Integers, Alphanumerics object. Then generate a file
-    with that text and a report that contains the counts of differenct objects
+    string, Real numbers, Integers, Alphanumerics object. After that create
+    a link with unique file name so that in every api call user get unique 
+    files. Then generate a file in the link with that text and create a report
+    that contains the counts of differenct objects
     """
 
     text = generate_text()
-    generate_file(text)
+    file_link = generate_link()
+    generate_file(text, file_link)
     report = generate_report(text)
 
     result = {
-        "link": "/templates/output_file.txt",
+        "link": file_link,
         "report": report
     }
 

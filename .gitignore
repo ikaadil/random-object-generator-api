@@ -2,8 +2,9 @@
 .venv
 venv/
 
-#Text file
+# Text file
 output_file.txt
 
-#pyc file
+# pyc file
 *.pyc
+
