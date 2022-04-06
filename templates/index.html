@@ -33,24 +33,24 @@
   </style>
 
   <script type="text/javascript">
-    var responseData = {};
+    var response_data = {};
     function generateFile() {
       fetch("/generate")
         .then((response) => response.json())
         .then((res) => {
-          responseData = res.response;
+          response_data = res.response;
           var linkElement = document.getElementById("linkText")
-          if (responseData?.link) {
+          if (response_data?.link) {
             linkElement.innerHTML = "Link: ";
             var a = document.getElementById("link");
-            a.href = responseData?.link;
+            a.href = response_data?.link;
             a.innerHTML = "click here to download";
           } else {
             linkElement.innerHTML="No link generated" 
             linkElement.classList.add("empty-link") 
           }
 
-          if (responseData?.report) {
+          if (response_data?.report) {
             var reportButton =
               document.getElementsByClassName("report-button")[0];
             reportButton.style.cursor = "pointer";
@@ -61,13 +61,13 @@
 
     function showReport() {
       document.getElementById("alphabet").innerHTML =
-        "Alphabetical string: " + responseData?.report?.alphabetical_string;
+        "Alphabetical string: " + response_data?.report?.alphabetical_string;
       document.getElementById("real-numbers").innerHTML =
-        "Real numbers: " + responseData?.report?.real_numbers;
+        "Real numbers: " + response_data?.report?.real_numbers;
       document.getElementById("integers").innerHTML =
-        "Integers: " + responseData?.report?.integers;
+        "Integers: " + response_data?.report?.integers;
       document.getElementById("alphanumerics").innerHTML =
-        "Alphanumerics: " + responseData?.report?.alphanumerics;
+        "Alphanumerics: " + response_data?.report?.alphanumerics;
     }
 
     function docWrite(docText) {

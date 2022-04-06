@@ -1,6 +1,7 @@
 import json
 import uuid
-from utils import *
+from object_detector import *
+from object_generator import *
 
 FOLDER_PATH = "templates/static/"
 MAX_FILE_SIZE = 2097152
