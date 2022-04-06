@@ -10,7 +10,7 @@ def get_counts_of_objects(text):
     count_of_float = 0
 
     for value in text.split(','):
-        if is_int(value):
+        if is_integer(value):
             count_of_integer += 1
         elif is_float(value):
             count_of_float += 1

@@ -22,8 +22,3 @@ def generate_file_and_report():
     }
 
     return result
-
-
-if __name__ == '__main__':
-    result = generate_file_and_report()
-    print(json.dumps(result, ensure_ascii=False, default=str, indent=2))

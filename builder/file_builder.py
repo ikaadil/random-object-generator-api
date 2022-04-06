@@ -38,7 +38,6 @@ def generate_text():
     return text
 
 
-
 def generate_link():
     """Generate a link with unique file name"""
 
@@ -46,10 +45,10 @@ def generate_link():
     file_link = FOLDER_PATH + file_name
 
     return file_link
+
+
 def generate_file(text, file_link):
     """Create the file with text in the file link with unique name"""
 
     with open(file_link, 'w') as file:
         file.write(text)
-
-

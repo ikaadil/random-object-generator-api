@@ -1,4 +1,4 @@
-def is_int(value):
+def is_integer(value):
     """ If the value can be convert into interger, then return true
     otherwise retrun false.
     """
@@ -33,6 +33,3 @@ def is_alphanumerics(value):
 
     return False
 
-
-if __name__ == '__main__':
-    print(is_alphanumerics("ad123"))
